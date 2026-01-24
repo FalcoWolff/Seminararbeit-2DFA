@@ -1,0 +1,46 @@
+\begin{thebibliography}{1}
+
+\bibitem{hopcroft}
+John~E. Hopcroft, Rajeev Motwani, and Jeffrey~D. Ullman.
+\newblock {\em Introduction to Automata Theory, Languages, and Computation}.
+\newblock Pearson, 3 edition, 2006.
+
+\bibitem{hulden_2015_two_way_to_one_way}
+Mans Hulden.
+\newblock From two-way to one-way finite automata---three regular
+  expression-based methods.
+\newblock In Frank Drewes, editor, {\em Implementation and Application of
+  Automata (CIAA 2015)}, volume 9223 of {\em Lecture Notes in Computer
+  Science}, pages 176--187, Cham, 2015. Springer.
+
+\bibitem{pighizzini_2012_two_way}
+Giovanni Pighizzini.
+\newblock Two-way finite automata: Old and recent results.
+\newblock In Enrico Formenti, editor, {\em Proceedings 18th international
+  workshop on Cellular Automata and Discrete Complex Systems and 3rd
+  international symposium Journ{\'{e}}es Automates Cellulaires, {AUTOMATA} {\&}
+  {JAC} 2012, La Marana, Corsica, September 19-21, 2012}, volume~90 of {\em
+  EPTCS}, pages 3--20, 2012.
+
+\bibitem{shepherdson_1959_reduction}
+J.~C. Shepherdson.
+\newblock The reduction of two-way automata to one-way automata.
+\newblock {\em IBM Journal of Research and Development}, 3(2):198--200, April
+  1959.
+
+\bibitem{sipser}
+Michael Sipser.
+\newblock {\em Introduction to the Theory of Computation}.
+\newblock Cengage Learning, 3 edition, 2012.
+
+\bibitem{vardi_1989_note_reduction}
+Moshe~Y. Vardi.
+\newblock A note on the reduction of two-way automata to one-way automata.
+\newblock {\em Information Processing Letters}, 30(5):261--264, 1989.
+
+\bibitem{vardi_endmarkers_1990}
+Moshe~Y. Vardi.
+\newblock Endmarkers can make a difference.
+\newblock {\em Information Processing Letters}, 35(3):145--148, July 1990.
+
+\end{thebibliography}

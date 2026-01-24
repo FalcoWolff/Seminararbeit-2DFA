@@ -1,0 +1,26 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Motivation}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Preliminaries}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Words and Languages}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}One-Way DFA and NFA}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Two-Way Deterministic Finite Automata}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Formal Definition}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Configuration and Acceptance}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}End-Markers}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Why 2DFA Can Be Better Descriptions}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Suffix-Dependent Languages}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Divisibility / Modular Properties}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Known Succinctness Separations (optional)}{9}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Reductions: From 2DFA to One-Way Automata}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Introduction}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Reduction from 2DFA to 1NFA}{9}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Lemma for Rejection Condition}{9}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Construction of the 1NFA}{10}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Correctness of the Construction}{10}{subsubsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.3}Reduction from 2DFA to 1DFA}{12}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}State Blow-Up and Complexity Discussion}{12}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Worked Example (optional)}{13}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Conclusion}{13}{section.6}%
+\contentsline {section}{\numberline {A}Appendix}{14}{appendix.A}%
