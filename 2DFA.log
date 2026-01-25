@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.8.5)  24 JAN 2026 19:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.8.5)  25 JAN 2026 23:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -597,66 +597,70 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write5
 \openout5 = `2DFA.toc'.
 
- [2] [3] [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 307--321
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--321
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--321
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--321
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--321
-
- []
-
-[7pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+ [2] [3] [4] [5] [6] [7pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.321 \end{proof}
-                 ] [8pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+l.322 \end{theorem}
+                   ]
+Underfull \hbox (badness 10000) in paragraph at lines 325--339
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--339
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--339
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--339
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 325--339
+
+ []
+
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.378 \section
-              {Reductions: From 2DFA to One-Way Automata}]
-Overfull \hbox (16.75339pt too wide) detected at line 416
+l.383 \end{example}
+                   ] [9pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.449 
+      ] [10]
+Overfull \hbox (16.75339pt too wide) detected at line 493
 \OML/cmm/m/it/12 T[] \OT1/cmr/m/n/12 := \OMS/cmsy/m/n/12 f \OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/12 S \OMS/cmsy/m/n/12 j []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s; i\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/12 g\OML/cmm/m/it/12 :
  []
 
-[9]
-Overfull \hbox (20.07372pt too wide) in paragraph at lines 467--472
+[11]
+Overfull \hbox (20.07372pt too wide) in paragraph at lines 544--549
 [][]\T1/cmr/bx/n/12 Lemma 2. []\T1/cmr/m/it/12 Let $\OML/cmm/m/it/12 A \OT1/cmr/m/n/12 = (^^F\OML/cmm/m/it/12 ; S; S[]; ^^Z; F\OT1/cmr/m/n/12 )$ \T1/cmr/m/it/12 be a two-way au-toma-ton, $\OML/cmm/m/it/12 B \OT1/cmr/m/n/12 = (^^F\OML/cmm/m/it/12 ; Q; Q[]; ^^N; G\OT1/cmr/m/n/12 )$
  []
 
-[10] [11] [12] (./2DFA.bbl) [13] [14] (./2DFA.aux)
+[12] [13] (./2DFA.bbl [14]) [15] (./2DFA.aux)
 Package rerunfilecheck Info: File `2DFA.out' has not changed.
-(rerunfilecheck)             Checksum: A5249EB08993BF71A5EA2B5ED7F4BBE8;4469.
+(rerunfilecheck)             Checksum: ED78724E19AF679EC650EA3CA03DF166;4391.
  ) 
 Here is how much of TeX's memory you used:
- 23420 strings out of 480194
- 445415 string characters out of 5893743
- 728811 words of memory out of 5000000
- 40907 multiletter control sequences out of 15000+600000
+ 23439 strings out of 480194
+ 445754 string characters out of 5893743
+ 728922 words of memory out of 5000000
+ 40919 multiletter control sequences out of 15000+600000
  488024 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,10n,89p,482b,981s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on 2DFA.pdf (14 pages, 252068 bytes).
+ </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/falco/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on 2DFA.pdf (15 pages, 266647 bytes).
 PDF statistics:
- 737 PDF objects out of 1000 (max. 8388607)
- 321 compressed objects within 4 object streams
- 68 named destinations out of 1000 (max. 500000)
+ 758 PDF objects out of 1000 (max. 8388607)
+ 340 compressed objects within 4 object streams
+ 75 named destinations out of 1000 (max. 500000)
  213 words of extra memory for PDF output out of 10000 (max. 10000000)
 

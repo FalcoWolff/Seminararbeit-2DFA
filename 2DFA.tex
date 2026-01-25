@@ -141,6 +141,24 @@ such that $L=L(A)$.
 We can conclude that 1DFA, 1NFA, and regular languages are equivalent in terms of
 expressive power.
 
+\subsection{Fooling Sets}
+\begin{definition}[Fooling set]
+  Let $L \subseteq \Sigma^*$. A set
+  \[
+  F=\{(x_i,y_i)\mid i=1,\dots,n\}\subseteq \Sigma^*\times\Sigma^*
+  \]
+  is called a \emph{fooling set} for $L$ if
+  \begin{enumerate}
+    \item $x_i y_i \in L$ for all $i$, and
+    \item for all $i\neq j$, at least one of the words $x_i y_j$ and $x_j y_i$
+          is not in $L$.
+  \end{enumerate}
+\end{definition}
+
+With fooling sets we can prove lower bounds for the size of 1NFA's.
+If a regular language $L$ admits a fooling set of size $n$, then every 1NFA
+recognizing $L$ must have at least $n$ states; see, e.g., \cite{nemcova_fooling_sets_survey}.
+
 \section{Two-Way Deterministic Finite Automata}
 \subsection{Formal Definition}
 The definitions of 2DFA and 2NFA are similar to those of the one-way finite automata.
@@ -227,7 +245,7 @@ with $n+3$ states, i.e. $O(n)$, for $L_n$ as follows:
 \end{itemize}
   
 We conclude that a 2DFA with $O(n)$ states can recognize $L_n$.
-Lets now consider a 1DFA for the same language.
+Let's now consider a 1DFA for the same language.
 One idea to construct such a 1DFA is the following: keep track of the last $n$ 
 symbols with different states. 
 Therefore we need states $\{0,1\}^n$, which gives us a total of $2^n$ states.
@@ -359,16 +377,75 @@ Figure~\ref{fig:pighizzini-fig1-redraw}.
 So there is no improvement in terms of descriptional complexity when using a 2DFA
 instead of a 1NFA for the suffix-dependent language $L_n$.
 
-\subsection{Divisibility / Modular Properties}
+\subsection{Divisibility}
 \begin{example}[Length divisible by $m$]
 $L_m=\{\,w\in\{a\}^* \mid |w|\equiv 0 \ (\mathrm{mod}\ m)\,\}$.
 \end{example}
-What to cover:
-\begin{itemize}
-  \item Minimal 1DFA has $m$ states (standard result).
-  \item 2DFA with fewer states when splitting into primes.
-  \item Special cases to reduce states further (e.g., even/odd).
-\end{itemize}
+Let's first prove that any one-way nondeterministic automaton for $L_m$ requires
+at least $m$ states.
+
+\begin{theorem}\label{thm:unary-mod-nfa-lb}
+Any 1NFA deciding $L_m$ requires at least $m$ states.
+Consequently, any 1DFA deciding $L_m$ requires at least $m$ states as well.
+\end{theorem}
+
+\begin{proof}
+We use a fooling set to show a lower bound on 1NFA.
+For $i=0,1,\ldots,m-1$ let $x_i:=a^i$ and $y_i:=a^{m-i}$, and define
+\[
+F:=\{(x_i,y_i)\mid i=0,\ldots,m-1\}.
+\]
+Then $x_i y_i=a^m\in L_m$ for all $i$.
+If $i\neq j$, then
+\[
+x_i y_j = a^{\,i+m-j}
+\]
+has length $m+(i-j)$, which is not divisible by $m$ since $0<|i-j|<m$.
+Hence $x_i y_j \notin L_m$ for all $i\neq j$, so $F$ is a fooling set of size $m$.
+Therefore every 1NFA for $L_m$ has at least $m$ states.
+Since 1DFA $\subset$ 1NFA the same lower bound holds for 1DFA.
+\end{proof}
+
+Note that in this example the lower bound for the states applies to both 1DFA and 1NFA.
+There exists a standard 1DFA with $m$ states for $L_m$ (see, e.g., \cite{sipser,hopcroft}).
+An example for $m=3$ is shown in Figure~\ref{fig:dfa-L3-mod}.
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{tikzpicture}[>=stealth, node distance=2.6cm, on grid, auto]
+    \node[state, initial, accepting] (q0) {$q_0$};
+    \node[state, right=of q0] (q1) {$q_1$};
+    \node[state, right=of q1] (q2) {$q_2$};
+  
+    \path[->]
+      (q0) edge[bend left=15] node {$a$} (q1)
+      (q1) edge[bend left=15] node {$a$} (q2)
+      (q2) edge[bend left=15] node {$a$} (q0);
+  \end{tikzpicture}
+  
+  \caption{A 1DFA for $L_3$.}
+  \label{fig:dfa-L3-mod}
+\end{figure}
+
+We can show that a 2DFA for $L_m$ can in some cases be significantly smaller.
+Let $m = \prod_{i=1}^r p_i^{a_i}$ be a product of $r$ distinct primes 
+$p_1 < p_2 < \cdots < p_r$ and exponents $a_i \in \mathbb{N}$ for $i \in \{1,\ldots,r\}$.
+We can construct a 2DFA for $L_m$ with $\sum_{i=1}^r p_i^{a_i}$ states as follows:
+In a first step the automaton counts the length of the input modulo $p_1^{a_1}$ by moving
+from the first symbol from the left to the right endmarker. 
+This requires $p_1^{a_1}$ states as in the standard modulo-m counter construction.
+If the length is not divisible by $p_1^{a_1}$, the automaton rejects.
+Then the automaton moves back to the left endmarker, while checking for divisibility
+by $p_2^{a_2}$ in the same way.
+After checking all $r$ prime power factors, the automaton accepts if and only if
+all checks were successful
+(cf.\ the general
+succinctness discussion in \cite{pighizzini_2012_two_way}).
+
+That example shows that with a 2DFA we can decrease the number of states from $\prod_{i=1}^r p_i^{a_i}$
+to $\sum_{i=1}^r p_i^{a_i}$.
+This is in contrast to the suffix dependent language from the previous example, 
+where the 2DFA had no advantage over the 1NFA.
 
 \subsection{Known Succinctness Separations (optional)}
 There are families of regular languages where 2DFA are exponentially smaller
@@ -606,7 +683,5 @@ Short wrap-up tied back to the goals.
 \bibliography{references}
 
 \appendix
-\section{Appendix}
-Extra proofs, larger automata diagrams, additional examples.
 
 \end{document}

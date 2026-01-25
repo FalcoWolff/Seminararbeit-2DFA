@@ -13,6 +13,12 @@ Mans Hulden.
   Automata (CIAA 2015)}, volume 9223 of {\em Lecture Notes in Computer
   Science}, pages 176--187, Cham, 2015. Springer.
 
+\bibitem{nemcova_fooling_sets_survey}
+Barbara N{\'e}mcov{\'a} et~al.
+\newblock A survey on fooling sets as effective tools for lower bounds on
+  nondeterministic state complexity.
+\newblock 2018.
+
 \bibitem{pighizzini_2012_two_way}
 Giovanni Pighizzini.
 \newblock Two-way finite automata: Old and recent results.
