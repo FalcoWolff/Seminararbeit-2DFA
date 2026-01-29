@@ -82,9 +82,9 @@ that illustrate how 2DFA can provide more natural or much more compact
 descriptions than one-way DFA and NFA, focusing in particular on
 suffix-dependent and modular properties. Second, we discuss constructions that
 simulate 2DFA by one-way automata (1NFA and 1DFA) and analyze the resulting
-blow-up in the number of states. In this way, we relate the descriptive
-advantages of 2DFA to classical one-way models and highlight the complexity
-trade-offs between them.
+blow-up in the number of states. In this way, we show the descriptive
+advantages of 2DFA to classical one-way models and the equivalence in complexity
+power.
 
 \section{Preliminaries}
 We mostly follow the standard definitions and notation from \cite{sipser,hopcroft}.
@@ -713,8 +713,47 @@ Also the task: "Given a two-way automata with n states, construct a one-way auto
 Theorem \ref{thm:2dfa-to-1dfa} is the better choice, because $O(\exp n)$ is better then a blowup of $O(\exp(n)^2)$.
 
 \section{Conclusion}
-Short wrap-up tied back to the goals.
 
+In this report we introduced two-way finite automata and
+compared them with classical one-way models. We first established the formal
+definitions and basic properties of two-way automata and then investigated their
+descriptive advantages over one-way finite automata. Although allowing the read head to move in both
+directions might at first suggest a higher expressive power, we have seen that
+2DFA recognize exactly the class of regular languages and therefore do not extend
+the expressive power of finite automata.
+
+The first main topic was about \emph{descriptional complexity}. We presented
+examples of regular languages for which two-way motion leads to significantly more
+compact automata. In particular, suffix-dependent languages and modular
+(divisibility) languages illustrate that a 2DFA may require fewer
+states than a corresponding 1DFA. In the case of suffix-dependent languages, we
+constructed a 2DFA with a linear number of states, while any equivalent 1DFA
+requires exponentially many states. Also we showed an equivalent 1NFA with a linear
+number of states, demonstrating that nondeterminism is as powerful as
+two-way motion for this language family. For modular languages, we presented a
+2DFA construction with $\sum_i p_i^{a_i}$ states for a modulus
+$m=\prod_i p_i^{a_i}$, while any equivalent one-way automaton requires at least
+$\prod_i p_i^{a_i}$ states. This descriptive complexity gap also holds
+for one-way nondeterministic automata.
+
+Another main topic of this report was the \emph{expressive complexity} of two-way finite automata.
+To show that the additional head movement does not increase expressive power, we
+discussed classical reductions from 2DFA to one-way automata. We followed Vardi's
+subset-style construction \cite{vardi_1989_note_reduction}, 
+which yields a one-way NFA for the complement language,
+and outlined Shepherdson's crossing-sequence construction 
+(\cite{vardi_1989_note_reduction},\cite{shepherdson_1959_reduction}), 
+which produces an
+equivalent one-way DFA. These two approaches highlight different trade-offs: while
+Vardi's proof is easier to understand, Shepherdson's method achieves a more
+favorable asymptotic bound on the number of states in the resulting deterministic
+automaton.
+
+Several aspects were beyond the scope of this report. These include alternative
+equivalence proofs based on regular expressions \cite{hulden_2015_two_way_to_one_way}, 
+restricted variants of two-way
+automata such as models with nondeterminism only at the endmarker position \cite{pighizzini_2012_two_way}, 
+and further language families that exhibit gaps in descriptional complexity.
 \bibliographystyle{plain}
 \bibliography{references}
 
