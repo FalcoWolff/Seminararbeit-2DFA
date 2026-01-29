@@ -6,6 +6,7 @@
 
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{hyperref}
+\usepackage{bookmark}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{float}
@@ -160,6 +161,7 @@ If a regular language $L$ admits a fooling set of size $n$, then every 1NFA
 recognizing $L$ must have at least $n$ states; see, e.g., \cite{nemcova_fooling_sets_survey}.
 
 \section{Two-Way Deterministic Finite Automata}
+
 \subsection{Formal Definition}
 The definitions of 2DFA and 2NFA are similar to those of the one-way finite automata.
 We only need to adjust the transition function and the head movement.
@@ -447,29 +449,35 @@ to $\sum_{i=1}^r p_i^{a_i}$.
 This is in contrast to the suffix dependent language from the previous example, 
 where the 2DFA had no advantage over the 1NFA.
 
-\subsection{Known Succinctness Separations (optional)}
-There are families of regular languages where 2DFA are exponentially smaller
-than equivalent 1DFA, and cite references.
-Maybe to much?
-
 \section{Reductions: From 2DFA to One-Way Automata}
+
 \subsection{Introduction}
-At first sight, it may seem that allowing the head to move left increases the power of
-finite automata beyond the regular languages. However, it is a classical result
-that 2DFA still recognize exactly the regular languages; hence there is no
-increase in expressive power.
+At first sight, it may seem that allowing the head to move left increases the
+power of finite automata beyond the regular languages. However, it is a classical
+result that two-way deterministic finite automata recognize exactly the regular
+languages; hence there is no increase in expressive power.
+
+The equivalence of one-way and two-way finite automata was already known in the
+late 1950s. Early presentations of the result are commonly attributed to work
+discussed at the Summer Institute of Symbolic Logic in 1957 and were later
+referenced by Rabin and Scott in their seminal paper
+\cite{rabin_scott_1959_finite_automata}. A complete published proof was given by
+Shepherdson in the same year \cite{shepherdson_1959_reduction}, based on the
+technique of \emph{crossing sequences}. 
+A different and more elementary proof using a subset construction was later
+presented by Vardi \cite{vardi_1989_note_reduction} in 1989.
 
 In this section we present two constructions that simulate a given 2DFA by a
 one-way automaton and analyze the resulting blow-up in the number of states.
-The first construction yields a one-way NFA for the complement language, and the
-second uses crossing-sequence analysis to convert a 2DFA into an equivalent
-one-way DFA. Our presentation follows \cite{vardi_1989_note_reduction}.
+We primarily follow Vardi's approach, which yields a one-way NFA for the
+complement language. In addition, we briefly discuss Shepherdson's construction,
+which yields an equivalent one-way DFA and is based on crossing sequences.
 
 There are also proofs of the equivalence based on regular expressions; see, e.g.,
 \cite{hulden_2015_two_way_to_one_way}. We do not cover this approach here.
 
 \subsection{Reduction from 2DFA to 1NFA}
-We follow the construction from \cite{vardi_1989_note_reduction}.
+We follow the construction from Vardi's subset construction \cite{vardi_1989_note_reduction}.
 
 \subsubsection{Lemma for Rejection Condition}
 Before presenting the construction, we need a lemma.
@@ -642,15 +650,47 @@ Now we proof that there is a transition between the states:
   conditions of Lemma \ref{lem:rejection-condition} (Lemma \ref{lem:rejection-condition}). $\Leftrightarrow$
   $w \in L(B)$ (Lemma \ref{lem:correctness-of-construction}).
 \end{proof}
-  
 
 \subsection{Reduction from 2DFA to 1DFA}
-Crossing sequence analysis.
+We follow the proof from Shepherdson \cite{shepherdson_1959_reduction} as presented by Vardi \cite{vardi_1989_note_reduction}.
+The full proof is quite long and technical, so we only outline the main idea here.
+Let $A=(\Sigma,S,S_0,\rho,F)$ be a two-way automaton and let
+$w=a_0 a_1 \cdots a_n \in \Sigma^*$.
+We define a A-label as a pair $(s_1,s_2)$ where $s_1,s_2 \in S$, which represents a
+run from $s_1$ to $s_2$.
+An A-labeling is a sequence of sets of A-labels, one set for each position in the input:
+\[
+m_0, m_1, \ldots, m_n \quad \text{with } m_i \subseteq S \times S.
+\]
+Intuitively, when there is an A-label $(s_1,s_2)$ in $m_i$, then there is a run of $A$ that
+starts in state $s_1$ at position $i$ on word $w$ and ends in state $s_2$ at position $i$.
+This run is guarenteed to never visit position $i+1$.
+
+As you may have noticed, with a given A-labeling we dont have to go 
+to the left. Assume we are at position i in state $s$ and we have to go to the left.
+We can look at the A-labels in $m_{i}$ to find a label $(s, s')$.
+Instead of going to the left, we can jump to state $s'$ at position $i$.
+This way we can simulate the two-way motion of $A$ with one-way motion.
+
+Note that at at position $i$ and for a given state $s_1$ there can be multiple
+A-labels $(s_1,s_2)$ in $m_i$ with different $s_2$.
+
+The difficult part is to create a one-way automaton that constructs valid A-labelings
+while reading the input from left to right. The automaton has to generate the 
+A-labeling on the fly. Such that at position $i$ it has generated $m_0, m_1, \ldots, m_i$.
+The automaton has to make sure that the A-labels are consistent with each other
+and with the transition function $\rho$ of $A$.
+The details are quite technical and we refer to the original paper by Shepherdson
+\cite{shepherdson_1959_reduction} or the presentation by Vardi \cite{vardi_1989_note_reduction}
+for more information.
+
+The following theorem summarizes the result of the construction.
+
 \begin{theorem}
-  \emph{(Statement quoted verbatim from \cite{vardi_1989_note_reduction}.)}
+  \emph{(Statement quoted verbatim from Vardi \cite{vardi_1989_note_reduction}.)}
   Let $A$ be a two-way automaton with $n$ states. Then there is a one-way
   deterministic automaton $B$ with $O(\exp n)$ states such that $L(B)=L(A)$.
-  \label{thm:2dfa-to-1dfa}
+  \label{thm:2dfa-to-1dfa}  
 \end{theorem}
 
 \subsection{State Blow-Up and Complexity Discussion}
@@ -671,10 +711,6 @@ Theorem \ref{thm:2dfa-to-1dfa} is the better choice, because of less state blow-
 
 Also the task: "Given a two-way automata with n states, construct a one-way automata deciding the complement."
 Theorem \ref{thm:2dfa-to-1dfa} is the better choice, because $O(\exp n)$ is better then a blowup of $O(\exp(n)^2)$.
-
-\subsection{Worked Example (optional)}
-Show one small 2DFA and (part of) its converted 1NFA/1DFA to make the construction concrete.\newline
-Maybe not possible, because of size?
 
 \section{Conclusion}
 Short wrap-up tied back to the goals.
