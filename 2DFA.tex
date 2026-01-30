@@ -15,9 +15,9 @@
 
 \setlist{noitemsep}
 
-\title{Two-Way Deterministic Finite Automata (2DFA)\\
-\large Descriptional Advantages and Reductions to One-Way Automata}
-\author{Falco Wolf}
+\title{``Logic and Automata'' Seminar, WiSe 25/26\\
+  \emph{Two-Way Automata}}
+\author{\emph{Falco Wolf}}
 \date{\today}
 
 \newtheorem{definition}{Definition}
@@ -30,18 +30,18 @@
 \maketitle
 
 \begin{abstract}
-Two-way deterministic finite automata (2DFA) are classical finite automata whose
-reading head may move both to the left and to the right on a read-only input
-tape. Although 2DFA recognize exactly the regular
-languages, allowing two-way head motion can make descriptions significantly more
-succinct than with ordinary one-way DFA and NFA. This seminar paper pursues two
-main goals. First, we illustrate how 2DFA can describe certain regular languages
-in a more natural or much more compact way, for example for suffix-dependent and
-modular properties. Second, we present
-constructions that simulate 2DFA by one-way automata (1NFA and 1DFA) and discuss
-the resulting blow-up in the number of states and its consequences for
-descriptional complexity.
+  Two-way automata are classical automata whose reading head may move both to the
+  left and to the right on a read-only input tape. Although two-way finite
+  automata (2FSA) recognize exactly the regular languages, allowing two-way head
+  motion can make descriptions significantly more succinct than ordinary one-way
+  DFAs and NFAs. This seminar paper pursues two main goals. First, we illustrate
+  how two-way deterministic finite automata (2DFA) can describe certain regular
+  languages in a more natural or much more compact way, for example for
+  suffix-dependent and modular properties. Second, we present constructions that
+  simulate two-way finite automata by one-way automata and discuss the resulting
+  blow-up in the number of states.
 \end{abstract}
+  
 
 \tableofcontents
 \newpage
@@ -54,7 +54,7 @@ the input from left to right in a single pass. Two-way deterministic finite
 automata (2DFA) extend this model by allowing the read head to move both to the
 left and to the right on a read-only input tape. 
 Depending on the problem end/start-marker can be added to the input word.
-With this extend the automata can detect the left and right end of the input.
+With this extend the automaton can detect the left and right end of the input.
 At first sight, this additional freedom might suggest that 2DFA are strictly more
 powerful than ordinary one-way automata.
 
@@ -81,7 +81,7 @@ The goal of this seminar paper is twofold. First, we present several examples
 that illustrate how 2DFA can provide more natural or much more compact
 descriptions than one-way DFA and NFA, focusing in particular on
 suffix-dependent and modular properties. Second, we discuss constructions that
-simulate 2DFA by one-way automata (1NFA and 1DFA) and analyze the resulting
+simulate 2FSA by one-way automata (1NFA and 1DFA) and analyze the resulting
 blow-up in the number of states. In this way, we show the descriptive
 advantages of 2DFA to classical one-way models and the equivalence in complexity
 power.
@@ -89,11 +89,13 @@ power.
 \section{Preliminaries}
 We mostly follow the standard definitions and notation from \cite{sipser,hopcroft}.
 \subsection{Words and Languages}
-Fix an alphabet $\Sigma$ throughout the paper.
+Let $\Sigma$ be an alphabet.
 The set of all finite words over $\Sigma$ is denoted by $\Sigma^*$,
 the empty word by $\varepsilon$.
 The length of a word $w$ is $|w|$.
 A language $L$ over $\Sigma$ is a subset of $\Sigma^*$.
+A word $w = (a_0,\ldots,a_{n})$ has length $n+1$ and its $i$-th symbol is $a_i$.
+We also write $w = a_0 a_1 \ldots a_{n}$. 
 
 \subsection{One-Way DFA and NFA}
 \begin{definition}[1DFA / 1NFA]
@@ -108,8 +110,8 @@ A deterministic one-way finite automaton is abbreviated as 1DFA,
 a nondeterministic one-way finite automaton as 1NFA.
 \end{definition}
 
-A configuration of a 1DFA/1NFA on input $w=w_1 w_2 \ldots w_n \in \Sigma^*$
-is a pair $(q,i)$ with $q \in Q$ and $0 \leq i \leq n$,
+A configuration of a 1DFA/1NFA on input $w=a_0 \ldots a_{n} \in \Sigma^*$
+is a pair $(q,i)$ with $q \in Q$ and $0 \leq i \leq n+1$,
 where $i$ indicates the position of the reading head.
 In the one-way model, the head moves one position to the right in each step.
 
@@ -121,13 +123,13 @@ such that $q_0 \in Q_0$, $i_0=0$, and for every $0 \le t < m$ we have
 \[
 i_{t+1} = i_t + 1
 \quad\text{and}\quad
-q_{t+1} \in \delta(q_t, w_{i_{t+1}}).
+q_{t+1} \in \delta(q_t, w_{i_{t}}).
 \]
 The input $w$ is accepted by $A$ iff there exists a run
 \[
 (q_0,i_0),(q_1,i_1),\ldots,(q_m,i_m)
 \]
-with $q_m \in F$ and $i_m=n$.
+with $q_m \in F$ and $i_m=n+1$.
 Let $L(A)$ denote the language recognized by $A$.
 
 \begin{definition}[Regular Language]
@@ -135,7 +137,8 @@ A language $L$ over $\Sigma$ is called regular iff there exists a 1DFA $A$
 such that $L=L(A)$.
 \end{definition}
 \begin{theorem}[Subset Construction]
-  For every 1NFA $A$ there exists a 1DFA $B$ such that $L(B)=L(A)$.
+  For every 1NFA $A$, with $n$ states, there exists a 1DFA $B$, with at most $exp(n)$, 
+  states such that $L(B)=L(A)$.
   \label{thm:subset-construction}
 \end{theorem}
 \noindent Theorem~\ref{thm:subset-construction} is standard; see \cite{sipser,hopcroft}.
@@ -179,18 +182,19 @@ We use a definition based on \cite{vardi_1989_note_reduction}.
 \end{definition}
 
 \subsection{Configuration and Acceptance}
+The definitions of runs and acceptance for 2DFA/2NFA follow
+\cite{vardi_1989_note_reduction}.
 We describe the computation of $A$ in terms of configurations and runs.
 A \emph{configuration} is a pair $(s,j) \in S \times \mathbb{N}$, where $s$
 denotes the current state and $j$ the current head position. A \emph{run} on an
 input word is a finite sequence of configurations.
 
-Let $w=a_0 a_1 \cdots a_{n-1} \in \Sigma^*$. A sequence
-$(s_0,j_0),\ldots,(s_m,j_m)$ is a run of $A$ on $w$ if $0 \le j_m \le n$ and for
-every $i$ with $0 \le i < m$ we have $0 \le j_i < n$ and there exists a pair
+Let $w=a_0 a_1 \cdots a_{n} \in \Sigma^*$. A sequence
+$(s_0,j_0),\ldots,(s_m,j_m)$ is a run of $A$ on $w$ if $0 \le j_m \le n+1$ and for
+every $i$ with $0 \le i < m$ we have $0 \le j_i \leq n$ and there exists a pair
 $(t,k) \in \rho(s_i,a_{j_i})$ such that $s_{i+1}=t$ and $j_{i+1}=j_i+k$.
-The run is \emph{accepting} if $s_0 \in S_0$, $j_0=0$, $j_m=n$, and $s_m \in F$.
+The run is \emph{accepting} if $s_0 \in S_0$, $j_0=0$, $j_m=n+1$, and $s_m \in F$.
 The automaton $A$ accepts $w$ iff it has an accepting run on $w$.
-\cite{vardi_endmarkers_1990}
 
 \subsection{End-Markers}
 In many constructions it is convenient to assume explicit boundary symbols.
@@ -213,6 +217,10 @@ by one-way automata are presented without endmarkers.
 Note that adding endmarkers does not increase the expressive power of two-way
 automata; see \cite{vardi_endmarkers_1990} (building on classical results such as
 \cite{shepherdson_1959_reduction}).
+
+\subsection{Example}
+- language of words over {0,1} that start and end with the same symbol
+- with both endmarkers, we can construct a 2DFA with 3 states
 
 \section{Why 2DFA Can Be Better Descriptions}
 
@@ -711,6 +719,12 @@ Theorem \ref{thm:2dfa-to-1dfa} is the better choice, because of less state blow-
 
 Also the task: "Given a two-way automata with n states, construct a one-way automata deciding the complement."
 Theorem \ref{thm:2dfa-to-1dfa} is the better choice, because $O(\exp n)$ is better then a blowup of $O(\exp(n)^2)$.
+
+\subsection{Worked Example}
+We will now present a small example of a 2DFA and outline how the construction from
+Vardi \cite{vardi_1989_note_reduction} would work on this example.
+The concrete construction is explained in Chapter 5.2.
+Let $A=(\Sigma,S,S_0,\rho,F)$ be a 2DFA with
 
 \section{Conclusion}
 
