@@ -253,7 +253,7 @@ automata; see \cite{vardi_endmarkers_1990} (building on classical results such a
   \caption{A 2DFA with endmarkers recognizing
   $L=\{w\in\{0,1\}^*\mid w\text{ ends with }0\}$.
   Labels are “read symbol / head movement”, where $R$ means move right,
-  $L$ means move left, and $0$ means stay.}
+  $L$ means move left, and $S$ means stay.}
   \label{fig:2dfa-ends-with-0}
 \end{figure}
 
@@ -265,7 +265,7 @@ no accepting transition is possible and the input is rejected.
 Note that a 1DFA for the same language requires only two states,
 as it can simply remember whether the last read symbol was $0$ or $1$.
 
-\section{Why 2DFA Can Be Better Descriptions}
+\section{Why 2DFA can be More Succinct}
 
 \subsection{Introduction}
 In this section we present examples of regular languages where 2DFA can provide
@@ -548,7 +548,7 @@ where the 2DFA had no advantage over the 1NFA.
 
 \subsection{Introduction}
 At first sight, it may seem that allowing the head to move left increases the
-power of finite automata beyond the regular languages. However, it is a classical
+expressive complexity of finite automata beyond the regular languages. However, it is a classical
 result that two-way deterministic finite automata recognize exactly the regular
 languages; hence there is no increase in expressive power.
 
@@ -572,7 +572,7 @@ There are also proofs of the equivalence based on regular expressions; see, e.g.
 \cite{hulden_2015_two_way_to_one_way}. We do not cover this approach here.
 
 \subsection{Reduction from 2DFA to 1NFA}
-We follow the construction from Vardi's subset construction \cite{vardi_1989_note_reduction}.
+We follow Vardi's construction \cite{vardi_1989_note_reduction}.
 
 \subsubsection{Lemma for Rejection Condition}
 Before presenting the construction, we need a lemma.
@@ -586,7 +586,7 @@ Before presenting the construction, we need a lemma.
     \item $S_0 \subseteq T_0$,
     \item $T_{n+1} \cap F = \emptyset$, and
     \item for every $0 \le i \le n$, every $s \in T_i$, and every transition
-          $(s',k) \in \rho(s,a_i)$ with $i+k > 0$, we have $s' \in T_{i+k}$.
+          $(s',k) \in \rho(s,a_i)$ with $i+k \geq 0$, we have $s' \in T_{i+k}$.
   \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -599,7 +599,7 @@ Before presenting the construction, we need a lemma.
   Since $A$ rejects $w$, no accepting configuration at position $n+1$ is reachable.
   Therefore $T_{n+1} \cap F = \emptyset$.
   Finally, let $0 \le i \le n$, let $s \in T_i$, and let $(s',k) \in \rho(s,a_i)$
-  with $i+k > 0$. By definition of $T_i$, there exists a run reaching $(s,i)$.
+  with $i+k \geq 0$. By definition of $T_i$, there exists a run reaching $(s,i)$.
   Extending this run by one transition yields a run reaching $(s',i+k)$, hence
   $s' \in T_{i+k}$.
   
@@ -642,7 +642,7 @@ We have $(U,V)\in\delta((T,U),a)$ if the following holds:
 \end{itemize}
 
 \subsubsection{Correctness of the Construction}
-The following lemma helps to proof the correctness of the construction.
+The following lemma helps to prove the correctness of the construction.
 \begin{lemma}\label{lem:correctness-of-construction}
   Let $A = (\Sigma,S,S_0,\rho,F)$ be a two-way automaton,
   $B = (\Sigma,Q,Q_0,\delta,G)$ be a 1NFA constructed as above and
@@ -652,6 +652,7 @@ The following lemma helps to proof the correctness of the construction.
 \end{lemma}
 
 \begin{proof}
+(to simplify we assume $w$ not empty)\newline
 \noindent($\Rightarrow$)
 Suppose $B$ accepts $w$. Then there exists an accepting path
 $C_0,C_1,\ldots,C_{n+1}$ with $n \in \mathbb{N}$.
@@ -683,7 +684,7 @@ with $T_i \in 2^S$.
 
 \medskip
 \noindent
-We can now proof that $T_0,\ldots,T_{n+1}$ has the properties of lemma1:
+We can now prove that $T_0,\ldots,T_{n+1}$ has the properties of lemma1:
 \begin{enumerate}
   \item $T_0 \in Q_0 \Rightarrow S_0 \subset T_0$.
   \item $(T_n,T_{n+1}) \in G \Rightarrow T_{n+1} \cap F = \emptyset$.
@@ -715,12 +716,12 @@ $T_0,\ldots,T_{n+1}$ sequence exists as defined in Lemma \ref{lem:rejection-cond
 \medskip
 \noindent($\Leftarrow$)
 Suppose there exists a sequence $T_0,\ldots,T_{n+1}$ as defined in Lemma \ref{lem:rejection-condition}.
-We proof that $T_0,(T_0,T_1),\ldots,(T_n,T_{n+1})$ is a accepting path for $w$ in $B$.
+We proof that $T_0,(T_0,T_1),\ldots,(T_n,T_{n+1})$ is a accepting run for $w$ in $B$.
 
 \medskip
 \noindent
-We use property 1 $S_0 \subset T_0 \Rightarrow T_0 \in Q_0$.
-We use property 2 $T_{n+1} \cap F = \emptyset \Rightarrow (T_n,T_{n+1}) \in G$.
+We use property 1: $S_0 \subset T_0 \Rightarrow T_0 \in Q_0$.
+We use property 2: $T_{n+1} \cap F = \emptyset \Rightarrow (T_n,T_{n+1}) \in G$.
 
 \medskip
 \noindent
@@ -734,7 +735,7 @@ Now we proof that there is a transition between the states:
 \begin{theorem}[Vardi~\cite{vardi_1989_note_reduction}]
   \emph{(Statement quoted verbatim from \cite{vardi_1989_note_reduction}.)}
   Let $A$ be a two-way automaton with $n$ states. Then there is a one-way automaton
-  $B$ with $O(\exp n)$ states such that $L(B)=\Sigma^* - L(A)$. !!Its $O((\exp n)^2)$ states!!
+  $B$ with $O((\exp n)^2)$ states such that $L(B)=\Sigma^* - L(A)$.
 \end{theorem}
 
 \begin{proof}
@@ -742,7 +743,7 @@ Now we proof that there is a transition between the states:
   construction above. Let $w \in \Sigma^*$.\newline
   $w \notin L(A)$ $\Leftrightarrow$ 
   There exists a sequence $T_0,\ldots,T_{n+1}$ satisfying the
-  conditions of Lemma \ref{lem:rejection-condition} (Lemma \ref{lem:rejection-condition}). $\Leftrightarrow$
+  conditions of Lemma \ref{lem:rejection-condition} (Lemma \ref{lem:rejection-condition}) $\Leftrightarrow$
   $w \in L(B)$ (Lemma \ref{lem:correctness-of-construction}).
 \end{proof}
 
@@ -751,7 +752,7 @@ We follow the proof from Shepherdson \cite{shepherdson_1959_reduction} as presen
 The full proof is quite long and technical, so we only outline the main idea here.
 Let $A=(\Sigma,S,S_0,\rho,F)$ be a two-way automaton and let
 $w=a_0 a_1 \cdots a_n \in \Sigma^*$.
-We define a A-label as a pair $(s_1,s_2)$ where $s_1,s_2 \in S$, which represents a
+We define an A-label as a pair $(s_1,s_2)$ where $s_1,s_2 \in S$, which represents a
 run from $s_1$ to $s_2$.
 An A-labeling is a sequence of sets of A-labels, one set for each position in the input:
 \[
@@ -759,7 +760,7 @@ m_0, m_1, \ldots, m_n \quad \text{with } m_i \subseteq S \times S.
 \]
 Intuitively, when there is an A-label $(s_1,s_2)$ in $m_i$, then there is a run of $A$ that
 starts in state $s_1$ at position $i$ on word $w$ and ends in state $s_2$ at position $i$.
-This run is guarenteed to never visit position $i+1$.
+This run is guaranteed to never visit position $i+1$.
 
 As you may have noticed, with a given A-labeling we dont have to go 
 to the left. Assume we are at position i in state $s$ and we have to go to the left.
@@ -769,6 +770,9 @@ This way we can simulate the two-way motion of $A$ with one-way motion.
 
 Note that at at position $i$ and for a given state $s_1$ there can be multiple
 A-labels $(s_1,s_2)$ in $m_i$ with different $s_2$.
+We have to keep track of all possible states we can reach at position $i$.
+Thus the one-way automaton must encode, in its state,
+all states that can be reached in this way.
 
 The difficult part is to create a one-way automaton that constructs valid A-labelings
 while reading the input from left to right. The automaton has to generate the 
@@ -806,12 +810,6 @@ Theorem \ref{thm:2dfa-to-1dfa} is the better choice, because of less state blow-
 
 Also the task: "Given a two-way automata with n states, construct a one-way automata deciding the complement."
 Theorem \ref{thm:2dfa-to-1dfa} is the better choice, because $O(\exp n)$ is better then a blowup of $O(\exp(n)^2)$.
-
-\subsection{Worked Example}
-We will now present a small example of a 2DFA and outline how the construction from
-Vardi \cite{vardi_1989_note_reduction} would work on this example.
-The concrete construction is explained in Chapter 5.2.
-Let $A=(\Sigma,S,S_0,\rho,F)$ be a 2DFA with
 
 \section{Conclusion}
 
@@ -852,9 +850,11 @@ automaton.
 
 Several aspects were beyond the scope of this report. These include alternative
 equivalence proofs based on regular expressions \cite{hulden_2015_two_way_to_one_way}, 
-restricted variants of two-way
-automata such as models with nondeterminism only at the endmarker position \cite{pighizzini_2012_two_way}, 
+variants of two-way automata such as models with 
+nondeterminism only at the endmarker position \cite{pighizzini_2012_two_way}, 
 and further language families that exhibit gaps in descriptional complexity.
+
+
 \bibliographystyle{plain}
 \bibliography{references}
 
