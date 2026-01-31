@@ -218,9 +218,52 @@ Note that adding endmarkers does not increase the expressive power of two-way
 automata; see \cite{vardi_endmarkers_1990} (building on classical results such as
 \cite{shepherdson_1959_reduction}).
 
-\subsection{Example}
-- language of words over {0,1} that start and end with the same symbol
-- with both endmarkers, we can construct a 2DFA with 3 states
+\subsection{Example of a 2DFA with Endmarkers}
+
+\begin{example}[Language of words ending with 0]
+  Let
+  \[
+  L = \{\, w \in \{0,1\}^* \mid \text{$w$ ends with $0$} \,\}.
+  \]
+  Assuming both a left and a right endmarker, the language $L$ can be
+  recognized by a 2DFA with three states. Let $b$ denote the left endmarker
+  and $e$ the right endmarker. The input $w \in \{0,1\}^*$ is therefore
+  presented on the tape as $bwe$, where $b$ is located at position $0$.
+  Figure~\ref{fig:2dfa-ends-with-0} shows such an automaton.
+\end{example}
+  
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[>=stealth, on grid, auto, node distance=3.2cm]
+    \node[state, initial] (q0) {$q_0$};
+    \node[state, right=of q0] (q1) {$q_1$};
+    \node[state, accepting, right=of q1] (qacc) {$q_{acc}$};
+
+    % scan to the right endmarker
+    \path[->]
+      (q0) edge[loop above] node {$b,0,1\,/\,R$} (q0)
+      (q0) edge node {$e\,/\,L$} (q1);
+
+    % check last symbol
+    \path[->]
+      (q1) edge node {$0\,/\,R$} (qacc)
+      (qacc) edge[loop above] node {$e,b,0,1\,/\,0$} (qacc);
+  \end{tikzpicture}
+
+  \caption{A 2DFA with endmarkers recognizing
+  $L=\{w\in\{0,1\}^*\mid w\text{ ends with }0\}$.
+  Labels are “read symbol / head movement”, where $R$ means move right,
+  $L$ means move left, and $0$ means stay.}
+  \label{fig:2dfa-ends-with-0}
+\end{figure}
+
+The automaton first moves to the right until it reaches the right endmarker
+$e$. It then moves one position to the left to inspect the last symbol of the
+input word. If this symbol is $0$, the automaton moves right onto the
+endmarker and enters the accepting state $q_{acc}$. If the last symbol is $1$,
+no accepting transition is possible and the input is rejected.
+Note that a 1DFA for the same language requires only two states,
+as it can simply remember whether the last read symbol was $0$ or $1$.
 
 \section{Why 2DFA Can Be Better Descriptions}
 
